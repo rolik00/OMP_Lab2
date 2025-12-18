@@ -3,10 +3,10 @@
 #include <omp.h>
 #include <time.h>
 
-// Ìàêñèìàëüíîå êîëè÷åñòâî èòåðàöèé äëÿ ïðîâåðêè îãðàíè÷åííîñòè
+// ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð½Ð¾ÑÑ‚Ð¸
 #define MAX_ITERATIONS 1000
 
-// Ãðàíèöû îáëàñòè íà êîìïëåêñíîé ïëîñêîñòè
+// Ð“Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð¾Ð±Ð»Ð°ÑÑ‚Ð¸ Ð½Ð° ÐºÐ¾Ð¼Ð¿Ð»ÐµÐºÑÐ½Ð¾Ð¹ Ð¿Ð»Ð¾ÑÐºÐ¾ÑÑ‚Ð¸
 #define MIN_X -2.0
 #define MAX_X 1.0
 #define MIN_Y -1.5
@@ -21,8 +21,8 @@ char mandelbrotContains(double real, double img) {
     double z_real = 0.0;
     double z_img = 0.0;
 
-    // Öèêë: zn+1 = zn^2 + c
-    // Óñëîâèå âûõîäà: |z|^2 >= 4 (òî åñòü |z| >= 2) èëè ïðåâûøåí ëèìèò èòåðàöèé
+    // Ð¦Ð¸ÐºÐ»: zn+1 = zn^2 + c
+    // Ð£ÑÐ»Ð¾Ð²Ð¸Ðµ Ð²Ñ‹Ñ…Ð¾Ð´Ð°: |z|^2 >= 4 (Ñ‚Ð¾ ÐµÑÑ‚ÑŒ |z| >= 2) Ð¸Ð»Ð¸ Ð¿Ñ€ÐµÐ²Ñ‹ÑˆÐµÐ½ Ð»Ð¸Ð¼Ð¸Ñ‚ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¹
     for (int i = 0; i < MAX_ITERATIONS; i++) {
         double z_real_sq = z_real * z_real;
         double z_img_sq = z_img * z_img;
@@ -38,7 +38,7 @@ char mandelbrotContains(double real, double img) {
         z_img = new_z_img;
     }
 
-    // Åñëè öèêë äîøåë äî MAX_ITERATIONS, ñ÷èòàåì, ÷òî òî÷êà ïðèíàäëåæèò ìíîæåñòâó
+    // Ð•ÑÐ»Ð¸ Ñ†Ð¸ÐºÐ» Ð´Ð¾ÑˆÐµÐ» Ð´Ð¾ MAX_ITERATIONS, ÑÑ‡Ð¸Ñ‚Ð°ÐµÐ¼, Ñ‡Ñ‚Ð¾ Ñ‚Ð¾Ñ‡ÐºÐ° Ð¿Ñ€Ð¸Ð½Ð°Ð´Ð»ÐµÐ¶Ð¸Ñ‚ Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²Ñƒ
     return 1;
 }
 
@@ -124,4 +124,5 @@ int main(int argc, char* argv[]) {
     printf("Results written to mandelbrot.csv\n");
 
     return 0;
+
 }
