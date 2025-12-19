@@ -61,15 +61,17 @@ void calculate_forces(Particle* particles, int n) {
 void euler_step(Particle* particles, int n, double dt) {
     #pragma omp parallel for
     for (int i = 0; i < n; i++) {
-        // v^{n} = v^{n-1} + a^{n-1} * dt
+        double vx_old = particles[i].v[0];
+        double vy_old = particles[i].v[1];
+        double vz_old = particles[i].v[2];
+
         particles[i].v[0] += particles[i].a[0] * dt;
         particles[i].v[1] += particles[i].a[1] * dt;
         particles[i].v[2] += particles[i].a[2] * dt;
-        
-        // r^{n} = r^{n-1} + v^{n-1} * dt
-        particles[i].r[0] += particles[i].v[0] * dt;
-        particles[i].r[1] += particles[i].v[1] * dt;
-        particles[i].r[2] += particles[i].v[2] * dt;
+
+        particles[i].r[0] += vx_old * dt;
+        particles[i].r[1] += vy_old * dt;
+        particles[i].r[2] += vz_old * dt;
     }
 }
 
@@ -134,7 +136,7 @@ int main(int argc, char* argv[]) {
     
     FILE* fout = fopen("trajectories.csv", "w");
     if (!fout) {
-        fprintf(stderr, "Cannot create output file\n");
+        fprintf(stderr, "Cant create output file\n");
         free(particles);
         return 1;
     }
@@ -169,6 +171,8 @@ int main(int argc, char* argv[]) {
         }
     }
     
+    end_time = omp_get_wtime();
+    printf("Total simulation time: %.2f seconds\n", end_time - start_time);
     if ((step-1) % OUTPUT_EVERY != 0) {
         fprintf(fout, "%.6f", t);
         for (int i = 0; i < n; i++) {
@@ -182,7 +186,5 @@ int main(int argc, char* argv[]) {
     
     printf("Simulation completed. Results saved to trajectories.csv\n");
     printf("Total steps: %ld\n", step);
-    end_time = omp_get_wtime();
-    printf("Total simulation time: %.2f seconds\n", end_time - start_time);
     return 0;
 }
