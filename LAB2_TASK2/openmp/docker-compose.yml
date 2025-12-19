@@ -1,6 +1,0 @@
-services:
-  nbody:
-    build: .
-    volumes:
-      - ./results:/results
-    command: bash -c "./openmp 1000.0 input.txt && cp trajectories.csv /results/"
