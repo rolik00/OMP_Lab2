@@ -1,0 +1,18 @@
+BENCHMARK RESULTS
+=================
+
+Configuration:
+  Initial keys: 1000
+  Total operations: 100000
+  Search: 0.80, Insert: 0.10, Delete: 0.10
+  Runs per config: 5
+
+Hardware: macOS Sequoia 15.4.1
+CPU: 2,3 GHz 8 cores processor Intel Core i9
+
+Threads  | Custom(s)      | Pthread(s)     | Speedup_C  | Speedup_P  | Eff_C(%)   | Eff_P(%)  
+---------|----------------|----------------|------------|------------|------------|------------
+1        | 2.420782e-01   | 2.323206e-01   | 1.00       | 1.00       | 100.0      | 100.0     
+2        | 2.811076e-01   | 3.858154e-01   | 0.86       | 0.60       | 43.0       | 30.0      
+4        | 3.498273e-01   | 4.192981e-01   | 0.69       | 0.55       | 17.2       | 13.8      
+8        | 6.100373e-01   | 5.578414e-01   | 0.40       | 0.42       | 5.0        | 5.2       

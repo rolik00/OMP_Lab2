@@ -1,0 +1,87 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build All",
+            "type": "shell",
+            "command": "make",
+            "args": ["all"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Собрать обе программы (test_custom и test_pthread)"
+        },
+        {
+            "label": "Build Custom RWLock Test",
+            "type": "shell",
+            "command": "make",
+            "args": ["test_custom"],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "Собрать тест с собственным rwlock"
+        },
+        {
+            "label": "Build Pthread RWLock Test",
+            "type": "shell",
+            "command": "make",
+            "args": ["test_pthread"],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "Собрать тест с библиотечным rwlock"
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"],
+            "problemMatcher": [],
+            "detail": "Удалить скомпилированные файлы"
+        },
+        {
+            "label": "Quick Test",
+            "type": "shell",
+            "command": "make",
+            "args": ["test"],
+            "dependsOn": "Build All",
+            "problemMatcher": [],
+            "detail": "Быстрый тест обеих реализаций"
+        },
+        {
+            "label": "Run Benchmarks",
+            "type": "shell",
+            "command": "make",
+            "args": ["benchmark"],
+            "dependsOn": "Build All",
+            "problemMatcher": [],
+            "detail": "Запустить полное сравнение производительности"
+        },
+        {
+            "label": "Run Custom Test (Interactive)",
+            "type": "shell",
+            "command": "./test_custom",
+            "args": ["${input:threadCount}"],
+            "dependsOn": "Build Custom RWLock Test",
+            "problemMatcher": [],
+            "detail": "Запустить тест с собственным rwlock (интерактивный ввод)"
+        },
+        {
+            "label": "Run Pthread Test (Interactive)",
+            "type": "shell",
+            "command": "./test_pthread",
+            "args": ["${input:threadCount}"],
+            "dependsOn": "Build Pthread RWLock Test",
+            "problemMatcher": [],
+            "detail": "Запустить тест с pthread rwlock (интерактивный ввод)"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "threadCount",
+            "type": "promptString",
+            "description": "Количество потоков",
+            "default": "4"
+        }
+    ]
+}
